@@ -27,6 +27,11 @@ services:
     ports:
       - "9090:9090"
 
+  sampleapp:
+    image: quay.io/brancz/prometheus-example-app:v0.3.0
+    ports:
+      - "3080:8080"
+
 volumes:
   loki:
   grafana:
