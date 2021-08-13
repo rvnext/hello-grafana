@@ -33,6 +33,28 @@ services:
     image: quay.io/brancz/prometheus-example-app:v0.3.0
     ports:
       - "3080:8080"
+    depends_on:
+      - prometheus
+
+  nginx:
+    # garden-variety nginx listening on port 80
+    image: nginx:latest
+    ports:
+      - "80:80"
+    logging:
+      # use official docker logging plugin
+      # install following instructions at 
+      #   https://grafana.com/docs/loki/latest/clients/docker-driver/
+      driver: loki
+      options:
+        # URL must be reacheable by docker so make sure you use the host IP
+        loki-url: http://10.250.0.6:3100/loki/api/v1/push
+        # add job tag
+        # this overrides all tags so container_name must be present as well
+        loki-external-labels: "job=docker,container_name={{.Name}}"
+    # wait for loki service before attempting to write to it
+    depends_on:
+      - loki
 
 volumes:
   loki:
