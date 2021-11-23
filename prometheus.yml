@@ -29,4 +29,5 @@ scrape_configs:
       - targets: 
         - "localhost:9090"
         - "sampleapp:8080"
-        - "10.250.0.6:9100"
+        - "10.250.7.3:9100"
+        - "grafana:3000"
