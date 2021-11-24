@@ -9,6 +9,7 @@ services:
       - "3000:3000"
     volumes:
       - "grafana:/var/lib/grafana"
+      - "./grafana.ini:/etc/grafana/grafana.ini"
 
   loki:
     image: grafana/loki:latest
@@ -55,7 +56,10 @@ services:
     # wait for loki service before attempting to write to it
     depends_on:
       - loki
-
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
 volumes:
   loki:
   grafana:
