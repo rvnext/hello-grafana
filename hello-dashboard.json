@@ -27,16 +27,52 @@
   "liveNow": false,
   "panels": [
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                50
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "3m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "/!\\ Uso de memoria por encima del 50% /!\\",
+        "name": "Uso de memoria alert",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "datasource": "InfluxDB",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlYlRd"
+            "mode": "thresholds"
           },
           "custom": {
+            "axisLabel": "",
             "axisPlacement": "left",
             "axisSoftMax": 50,
-            "axisWidth": 0,
             "barAlignment": -1,
             "drawStyle": "bars",
             "fillOpacity": 0,
@@ -59,7 +95,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "mappings": [],
@@ -71,8 +107,12 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "blue",
+                "value": 40
+              },
+              {
+                "color": "purple",
+                "value": 75
               }
             ]
           },
@@ -89,7 +129,9 @@
       "id": 19,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -104,9 +146,17 @@
           "refId": "A"
         }
       ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "op": "gt",
+          "value": 50,
+          "visible": true
+        }
+      ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Uso de memoria",
+      "title": "Uso de memoria Nginx",
       "type": "timeseries"
     },
     {
@@ -124,7 +174,7 @@
             "steps": [
               {
                 "color": "green",
-                50"value": null
+                "value": null
               },
               {
                 "color": "yellow",
@@ -193,12 +243,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
-                "value": null
-              },
-              {
                 "color": "green",
-                "value": 20
+                "value": null
               },
               {
                 "color": "yellow",
@@ -251,7 +297,7 @@
           "refId": "A"
         }
       ],
-      "title": "Uso de disco Nginx",
+      "title": "Promedio uso de disco Nginx",
       "type": "stat"
     },
     {
@@ -424,7 +470,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
             "axisLabel": "",
@@ -455,12 +501,12 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line+area"
             }
           },
           "mappings": [],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
@@ -492,7 +538,9 @@
       "id": 15,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "lastNotNull"
+          ],
           "displayMode": "table",
           "placement": "bottom"
         },
@@ -950,5 +998,5 @@
   "timezone": "",
   "title": "hello-dashboard",
   "uid": "0yHrA4pnz",
-  "version": 21
+  "version": 22
 }
