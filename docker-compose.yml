@@ -69,6 +69,10 @@ services:
     image: nginx/nginx-prometheus-exporter:0.9.0
     command: -nginx.scrape-uri=https://2048.5ie9271jos84o.eu-west-1.cs.amazonlightsail.com/status
 
+  ibm-exporter:
+    image: nginx/nginx-prometheus-exporter:0.9.0
+    command: -nginx.scrape-uri=https://cf2048-r.eu-de.cf.appdomain.cloud/status
+
   mailhog:
     image: mailhog/mailhog
     ports:

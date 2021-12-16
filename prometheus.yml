@@ -34,3 +34,4 @@ scrape_configs:
         - "nginx-exporter:9113"
         - "influxdb:8086"
         - "aws-exporter:9113"
+        - "ibm-exporter:9113"
